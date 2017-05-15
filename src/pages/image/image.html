@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+      <ion-item>
+          <ion-avatar item-left>
+              <img src="assets/uploads/icons/gallery.jpg"/>
+          </ion-avatar>
+          <h1>Gallery</h1>
+          <button ion-button icon-left  item-right (click) = 'GoFriendList()'>
+              <ion-icon ios="ios-cloud-upload-outline" md="md-cloud-upload" ></ion-icon>
+              Go Friend List
+          </button>
+      </ion-item>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-12 id="avatar">
+                <img style="height: 200px !important;" [src] = "avatar" (click) = "takeToLibrary('avatar')"/>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-4>
+                <img style="height: 100px !important; width: 100px !important" [src] = 'image1' (click) = "takeToLibrary('image1')"/>
+            </ion-col>
+            <ion-col col-4>
+                <img style="height: 100px !important; width: 100px !important" [src] = 'image2' (click) = "takeToLibrary('image2')"/>
+            </ion-col>
+            <ion-col col-4>
+                <img style="height: 100px !important; width: 100px !important" [src] = 'image3' (click) = "takeToLibrary('image3')"/>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-4>
+                <img style="height: 100px !important; width: 100px !important" [src] = 'image4' (click) = "takeToLibrary('image4')"/>
+            </ion-col>
+            <ion-col col-4>
+                <img style="height: 100px !important; width: 100px !important" [src] = 'image5' (click) = "takeToLibrary('image5')"/>
+            </ion-col>
+            <ion-col col-4>
+                <img style="height: 100px !important; width: 100px !important" [src] = 'image6' (click) = "takeToLibrary('image6')"/>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-title>
+        Friend List
+    </ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="friendlist">
+      <ion-segment-button value="result">
+        Result
+      </ion-segment-button>
+      <ion-segment-button value="require">
+        Require search
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div [ngSwitch]="friendlist">
+        <ion-list *ngSwitchCase="'result'">
+            <ion-item *ngFor = 'let item of address' (click) = 'GetFriendInformation(item.id)'>
+                <ion-thumbnail item-left>
+                    <img [src] = "item.avatar">
+                </ion-thumbnail>
+                <h2>{{item.name}}</h2>
+                <h2>{{item.address}}</h2>
+                <h2>Distance : {{item.distance}}</h2>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'require'">
+            <h2>These are the criteria that helps you find exactly the people you want to make friends</h2>
+            <hr>
+            <form (ngSubmit)="RequireForm()">
+                <ion-item>
+                <ion-range style="padding-left: 0px !important" min="0" max="15" pin="true" [(ngModel)] = "require.distance" color="secondary" name = 'distance'>
+                    <ion-label range-left>Distance</ion-label>
+                    <ion-label range-right>
+                        <ion-badge>{{ require.distance }} KM</ion-badge>
+                    </ion-label>
+                </ion-range>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">Job</ion-label>
+                <ion-select name = "job" [(ngModel)] = "require.job">
+                    <ion-option value="it">IT</ion-option>
+                    <ion-option value="accountant">Accountant</ion-option>
+                    <ion-option value="teacher">Teacher</ion-option>
+                    <ion-option value="doctor">Doctor</ion-option>
+                    <ion-option value="engineer">Engineer</ion-option>
+                </ion-select>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">Education level</ion-label>
+                <ion-select name = "educational_level" [(ngModel)] = "require.educational_level">
+                    <ion-option value="bachelor">Bachelor</ion-option>
+                    <ion-option value="master">Master</ion-option>
+                    <ion-option value="doctor">Doctor</ion-option>
+                </ion-select>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">Personalities</ion-label>
+                <ion-select name = "personalities" [(ngModel)] = "require.personalities">
+                    <ion-option value="lovely">Lovely</ion-option>
+                    <ion-option value="strong">Strong</ion-option>
+                </ion-select>
+            </ion-item>
+                <button ion-button type="submit" block>Save require search</button>
+            </form>
+        </ion-list>
+    </div>
+</ion-content>

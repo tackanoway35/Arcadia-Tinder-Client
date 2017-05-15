@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+        Facebook Friendlist
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    aaaaaaa
+    <ion-list *ngIf = "fb_friendlist.fblist && fb_friendlist.fblist != null">
+        <ion-item-sliding>
+            <ion-item *ngFor = "let item of fb_friendlist.fblist">
+                <img item-left [src] = "item.picture.data.url">
+                <h2 item-left style="text-align: center !important;">{{ item.name }}</h2>
+            </ion-item>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>

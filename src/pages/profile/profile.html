@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            <ion-item>
+                <h2>Profile</h2>
+                <button ion-button item-right (click) = 'UpdateProfile()'>Edit Profile</button>
+            </ion-item>
+            
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+        <div>
+            <ion-card>
+                <img [src] = "member.avatar"/>
+            </ion-card>
+        </div>
+        
+        <ion-card-content>
+            <ion-card-title>
+                <ion-item>
+                    <h1>{{ member.name }} - {{ member.age }}</h1>  
+                </ion-item>
+            </ion-card-title>
+            <p>
+                {{ member.about_yourself }}
+            </p>
+        </ion-card-content>
+    
+    
+    <ion-item>
+        <ion-icon ios="ios-call" md="md-call" item-left style="color: #d03e84"></ion-icon>
+        Tel
+        <p item-right style="font-weight: bold">{{ member.tel }}</p>
+    </ion-item>
+
+    <ion-item>
+        <ion-icon ios="ios-contacts" md="md-contacts" item-left style="color: #d03e84"></ion-icon>
+        Job
+        <p item-right style="font-weight: bold">{{ member.job }}</p>
+    </ion-item>
+
+    <ion-item>
+        <ion-icon ios="ios-book" md="md-book" item-left style="color: #d03e84"></ion-icon>
+        Educational level
+        <p item-right style="font-weight: bold">{{ member.educational_level }}</p>
+    </ion-item>
+
+    <ion-item>
+        <ion-icon ios="ios-heart" md="md-heart" item-left style="color: #d03e84"></ion-icon>
+        Personalities
+        <p item-right style="font-weight: bold">{{ member.personalities }}</p>
+    </ion-item>
+    
+    
+</ion-content>

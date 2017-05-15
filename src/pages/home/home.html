@@ -1,0 +1,201 @@
+<ion-header>
+  <ion-navbar>
+    <ion-item>
+        <ion-avatar item-left>
+            <img src="assets/uploads/icons/user.png"/>
+        </ion-avatar>
+
+        <h2>{{ title }}</h2>
+        <button ion-button item-right (click) = "GoToSignIn()" *ngIf = "signUpStatus == 1">
+            Go to sign In
+        </button>
+    </ion-item>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding >
+    <div *ngIf = "loggedIn == 0">
+        <div  [hidden]= "signUpStatus ==1" style="width: 90% !important; margin: 0px auto !important">
+            <br>
+            <br>
+            <br>
+            <button ion-button block color="primary" (click) = "loginFacebook()">
+                <ion-icon name="logo-facebook"></ion-icon>
+                &nbsp;&nbsp;Login Facebook
+            </button><br>
+
+            <button ion-button block color="danger" (click) = "loginGmail()">
+                <ion-icon name="logo-googleplus"></ion-icon>
+                &nbsp;Login Gmail
+            </button><br>
+            <hr>
+        </div>    
+        <div id = "login-tinder-content">
+        <!--Form Sign In-->
+        <form [formGroup] = "signInForm" (ngSubmit) = "SignIn(signInForm.value)" *ngIf = "signInStatus == 1">
+            <h2 style="text-align: center">Login by Tinder app</h2>
+            <ion-list>
+                <ion-item>
+                    <ion-input type="text" formControlName="si_username" placeholder="Username"></ion-input>
+                </ion-item>
+
+                <ion-item *ngIf = "!si_username.valid && ( si_username.dirty || si_username.touched )" class = "error-box">
+                    <p *ngIf = "si_username.hasError('required')" style="color: #a94442;"> Username is required</p>
+                    <p *ngIf = "si_username.hasError('maxlength')" style="color: #a94442;"> Maxlength is 30 characters</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input type="password" formControlName = "si_password" placeholder="Password"></ion-input>
+                </ion-item>
+                <ion-item class="error-box" *ngIf = "!si_password.valid && ( si_password.dirty || si_password.touched )">
+                          <p *ngIf = "si_password.hasError('required')" style="color: #a94442;"> Password is required</p>
+                    <p *ngIf = "si_password.hasError('maxlength')" style="color: #a94442;"> Maxlength is 30 characters</p>
+                </ion-item>
+
+                <ion-item>
+                    Haven't account ! Sign up here
+                    <button ion-button item-right color="secondary" (click) = "GoToSignUp()">
+                        Sign Up
+                    </button>
+                </ion-item>
+
+                <ion-item>
+                    <button ion-button block large [disabled] = "!signInForm.valid">
+                            <ion-icon ios="ios-cloud-upload" md="md-cloud-upload"></ion-icon>
+                        &nbsp;Sign In
+                    </button>
+                </ion-item>
+            </ion-list>
+        </form>
+        <!--End form sign in-->
+
+        <!--Form Sign up-->
+
+        <form [formGroup] = "signUpForm" (ngSubmit) = "SignUp(signUpForm.value)" [hidden] = "signUpStatus != 1">
+            <ion-list>
+                <ion-item>
+                    <ion-input type="text" placeholder = "Username" formControlName = "username"></ion-input>
+                </ion-item>
+
+                <ion-item class="error-box" *ngIf = "(username.hasError('required') || username.hasError('maxlength')|| username.hasError('unique'))  && ( username.dirty || username.touched)">
+                          <p *ngIf = "username.hasError('required')" style="color: #a94442;"> Username is required</p>
+                    <p *ngIf = "username.hasError('maxlength')" style="color: #a94442;"> Maxlength is 30 characters</p>
+                    <p *ngIf = "username.hasError('unique')" style="color: #a94442;"> Username has already</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input type="password" placeholder = "Password" formControlName = "password"></ion-input>
+                </ion-item>
+
+                <ion-item class="error-box" *ngIf = "!password.valid && ( password.dirty || password.touched)">
+                          <p *ngIf = "password.hasError('required')" style="color: #a94442;"> Password is required</p>
+                    <p *ngIf = "password.hasError('maxlength')" style="color: #a94442;"> Maxlength is 30 characters</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input type="text" formControlName="name"  placeholder="Name"></ion-input>
+                </ion-item>
+                <ion-item *ngIf = "!name.valid && ( name.dirty || name.touched )" class = "error-box">
+                    <p *ngIf = "name.hasError('required')" style="color: #a94442;"> Name is required</p>
+                    <p *ngIf = "name.hasError('maxlength')" style="color: #a94442;"> Maxlength is 30 characters</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input type="email" formControlName = "email" placeholder="Email"></ion-input>
+                </ion-item>
+                <ion-item class="error-box" *ngIf = "!email.valid && ( email.dirty || email.touched )">
+                          <p *ngIf = "email.hasError('required')" style="color: #a94442;"> Email is required</p>
+                    <p *ngIf = "email.hasError('email')" style="color: #a94442;"> Email you type is not email (ex : g@gmail.com, y@yahoo.com ...)</p>
+                    <p *ngIf = "email.hasError('maxlength')" style="color: #a94442;"> Maxlength is 30 characters</p>
+                </ion-item>
+
+                <ion-item id="item">
+                    <ion-label style='font-weight: bold'>Address</ion-label>
+                    <ion-input id="address" type="text" formControlName = 'address' placeholder = "Enter a location"></ion-input>
+                    <!--<input id="address" type="text" formControlName = 'address' placeholder='Enter a location'/>-->
+                </ion-item>
+
+                <ion-item class="error-box" *ngIf = "!address.valid && ( address.dirty || address.touched)">
+                    <p *ngIf = "address.hasError('required')" style="color: #a94442;"> Address is required</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label style="font-weight: bold">Gender</ion-label>
+                    <ion-select formControlName = "gender" >
+                        <ion-option value="male">Male</ion-option>
+                        <ion-option value="female">Female</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item class="error-box" *ngIf = "!gender.valid && ( gender.dirty || gender.touched )">
+                          Gender is required
+                </ion-item>
+
+                <ion-item>
+                    <ion-input type="text" placeholder="Telephone number" formControlName = "tel" ></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label style="font-weight: bold">Birthday</ion-label>
+                    <ion-datetime displayFormat = "DD MMM, YYYY" formControlName = "birthday" ></ion-datetime>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label style="font-weight: bold">Job</ion-label>
+                    <ion-select formControlName = "job" >
+                        <ion-option value="it">IT</ion-option>
+                        <ion-option value="accountant">Accountant</ion-option>
+                        <ion-option value="teacher">Teacher</ion-option>
+                        <ion-option value="doctor">Doctor</ion-option>
+                        <ion-option value="engineer">Engineer</ion-option>
+                    </ion-select>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label style="font-weight: bold">Education level</ion-label>
+                    <ion-select formControlName = "educational_level" >
+                        <ion-option value="bachelor">Bachelor</ion-option>
+                        <ion-option value="master">Master</ion-option>
+                        <ion-option value="doctor">Doctor</ion-option>
+                    </ion-select>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label style="font-weight: bold">Personalities</ion-label>
+                    <ion-select formControlName = "personalities" >
+                        <ion-option value="lovely">Lovely</ion-option>
+                        <ion-option value="strong">Strong</ion-option>
+                    </ion-select>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label style="font-weight: bold">About Yourself</ion-label>
+                    <ion-textarea type="text" formControlName = "about_yourself" placeholder="Introduce something about yourself" rows="5"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                    <button ion-button block large [disabled] = "!signUpForm.valid">
+                            <ion-icon ios="ios-cloud-upload" md="md-cloud-upload"></ion-icon>
+                        &nbsp;SignUp
+                    </button>
+                </ion-item>
+            </ion-list>
+        </form>
+    <!--End form sign up-->
+    </div>
+    </div>
+    
+    <div *ngIf = "loggedIn == 1">
+        <br>
+        <ion-card>
+            <img [src] = "user.avatar"/>
+
+            <ion-card-content>
+                <ion-card-title>
+                    {{ user.name }}
+                </ion-card-title>
+            </ion-card-content>
+            <button ion-button block color="secondary" (click) = "GoToContactPage()">SEARCH FRIEND</button>
+            <button ion-button block color="danger" (click) = "LogOutApp()">LOG OUT</button>
+        </ion-card>
+    </div>
+</ion-content>

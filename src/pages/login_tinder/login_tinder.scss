@@ -1,0 +1,17 @@
+.ios, .md {
+    login-tinder {
+        .error-box {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            margin-left : 15px;
+            width : 95%;
+        }
+        #login-tinder-content{
+            width: 90%;
+            margin : 20px auto
+        }
+    }
+}

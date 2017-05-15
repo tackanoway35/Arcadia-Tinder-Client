@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-navbar>
+    <ion-item>
+          <ion-avatar item-left>
+              <img src="assets/uploads/icons/user.png"/>
+          </ion-avatar>
+          
+          <button ion-button icon-left item-right [disabled] = '!userForm.valid' form = 'ngForm1'>
+              <ion-icon ios="ios-cloud-upload-outline" md="md-cloud-upload"></ion-icon>
+              Save profile
+          </button>
+<!--          <button ion-button color="secondary" icon-left item-right (click) = "GoToGallery()">
+              <ion-icon ios="ios-images-outline" md="md-images"></ion-icon>
+              Go gallery
+          </button>-->
+      </ion-item>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+<div style="width : 90%; margin : 0px auto;">
+    <form [formGroup] = "userForm" (ngSubmit) = "EditProfile(userForm.value)" id='ngForm1'>
+        <ion-list>
+            <ion-item>
+                <ion-label style="font-weight: bold">Name</ion-label>
+                <ion-input type="text" formControlName="name" [(ngModel)] = "fb_user.name" placeholder="Name"></ion-input>
+            </ion-item>
+            <ion-item *ngIf = "!name.valid && ( name.dirty || name.touched )" class = "error-box">
+                Name is required
+            </ion-item>
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">Email</ion-label>
+                <ion-input type="email" formControlName = "email" [(ngModel)] = "fb_user.email" placeholder="Email"></ion-input>
+            </ion-item>
+            <ion-item class="error-box" *ngIf = "!email.valid && ( email.dirty || email.touched )">
+                <p *ngIf = "email.hasError('required')" style="color: #a94442;"> Email is required</p>
+                <p *ngIf = "email.hasError('email')" style="color: #a94442;"> Email you type is not email (ex : g@gmail.com, y@yahoo.com ...)</p>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">Address</ion-label>
+                <ion-input id="useraddress" type="text" placeholder="Enter a location" formControlName = 'address' [(ngModel)] = "fb_user.address"></ion-input>
+            </ion-item>
+            <ion-item *ngIf = "!address.valid && ( address.dirty || address.touched )" class = "error-box">
+                Address is required
+            </ion-item>
+            
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">Gender</ion-label>
+                <ion-select formControlName = "gender" [(ngModel)] = "fb_user.gender">
+                    <ion-option value="male">Male</ion-option>
+                    <ion-option value="female">Female</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item class="error-box" *ngIf = "!gender.valid && ( gender.dirty || gender.touched )">
+                Gender is required
+            </ion-item>
+            
+            <ion-item>
+                <ion-input type="text" placeholder="Telephone number" formControlName = "tel" [(ngModel)] = "fb_user.tel"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">Birthday</ion-label>
+                <ion-datetime displayFormat = "DD MMM, YYYY" formControlName = "birthday" [(ngModel)] = "fb_user.birthday || date"></ion-datetime>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">Job</ion-label>
+                <ion-select formControlName = "job" [(ngModel)] = "fb_user.job">
+                    <ion-option value="it">IT</ion-option>
+                    <ion-option value="accountant">Accountant</ion-option>
+                    <ion-option value="teacher">Teacher</ion-option>
+                    <ion-option value="doctor">Doctor</ion-option>
+                    <ion-option value="engineer">Engineer</ion-option>
+                </ion-select>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">Education level</ion-label>
+                <ion-select formControlName = "educational_level" [(ngModel)] = "fb_user.educational_level">
+                    <ion-option value="bachelor">Bachelor</ion-option>
+                    <ion-option value="master">Master</ion-option>
+                    <ion-option value="doctor">Doctor</ion-option>
+                </ion-select>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">Personalities</ion-label>
+                <ion-select formControlName = "personalities" [(ngModel)] = "fb_user.personalities">
+                    <ion-option value="lovely">Lovely</ion-option>
+                    <ion-option value="strong">Strong</ion-option>
+                </ion-select>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">About Yourself</ion-label>
+                <ion-textarea type="text" formControlName = "about_yourself" [(ngModel)] = "fb_user.about_yourself" placeholder="Introduce something about yourself" rows="5"></ion-textarea>
+            </ion-item>
+        </ion-list>
+    </form>
+</div>
+
+</ion-content>
+    

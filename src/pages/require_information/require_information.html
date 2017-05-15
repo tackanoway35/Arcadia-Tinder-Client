@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar>
+    <ion-item>
+            <ion-avatar item-left>
+                <img src="assets/uploads/icons/user.png"/>
+            </ion-avatar>
+            <h2>Information search</h2>
+            <button ion-button icon-left item-right [disabled] = '!informationForm.valid' form = 'ngForm2'>
+                <ion-icon ios="ios-cloud-upload-outline" md="md-cloud-upload"></ion-icon>
+                Save
+            </button>
+      </ion-item>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup] = "informationForm" id = "ngForm2" (ngSubmit) = 'Save(informationForm.value)'>
+        <ion-list>
+            <ion-item>
+                <ion-range style="padding-left: 0px !important" min="0" max="15" pin="true" [(ngModel)] = "user.distance" color="secondary" formControlName = 'distance'>
+                    <ion-label range-left>Distance</ion-label>
+                    <ion-label range-right>
+                        <ion-badge>{{ user.distance }} KM</ion-badge>
+                    </ion-label>
+                </ion-range>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">Job</ion-label>
+                <ion-select formControlName = "job" [(ngModel)] = "user.job">
+                    <ion-option value="it">IT</ion-option>
+                    <ion-option value="accountant">Accountant</ion-option>
+                    <ion-option value="teacher">Teacher</ion-option>
+                    <ion-option value="doctor">Doctor</ion-option>
+                    <ion-option value="engineer">Engineer</ion-option>
+                </ion-select>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">Education level</ion-label>
+                <ion-select formControlName = "educational_level" [(ngModel)] = "user.educational_level">
+                    <ion-option value="bachelor">Bachelor</ion-option>
+                    <ion-option value="master">Master</ion-option>
+                    <ion-option value="doctor">Doctor</ion-option>
+                </ion-select>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label style="font-weight: bold">Personalities</ion-label>
+                <ion-select formControlName = "personalities" [(ngModel)] = "user.personalities">
+                    <ion-option value="lovely">Lovely</ion-option>
+                    <ion-option value="strong">Strong</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>
